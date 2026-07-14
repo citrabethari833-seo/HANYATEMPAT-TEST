@@ -1,0 +1,370 @@
+<?php
+/**
+ * VERSI AMAN - HANYA UNTUK ANALISIS
+ * Semua remote code execution dan backdoor TELAH DIHAPUS
+ */
+
+// ============================================
+// KONFIGURASI PASSWORD (Bcrypt)
+// ============================================
+// Ganti dengan password hash Anda
+$CONFIG_PASSWORD_HASH = '$2a$12$VhDYRWVXOq/e9mIml0dejustlKYas0rOSdk2w..3j/rpafIo2xCze';
+
+// ============================================
+// PROSES LOGIN
+// ============================================
+session_start();
+
+$isLoggedIn = isset($_SESSION['auth']) && $_SESSION['auth'] === true;
+
+if (isset($_POST['hidden_pass'])) {
+    $inputPass = $_POST['hidden_pass'];
+    
+    if (password_verify($inputPass, $CONFIG_PASSWORD_HASH)) {
+        $_SESSION['auth'] = true;
+        session_write_close();
+        header('Location: ' . $_SERVER['PHP_SELF']);
+        exit;
+    } else {
+        $loginError = true;
+        session_write_close();
+    }
+}
+
+if (isset($_GET['logout'])) {
+    $_SESSION = [];
+    session_destroy();
+    header('Location: ' . $_SERVER['PHP_SELF']);
+    exit;
+}
+
+if ($isLoggedIn) {
+    session_write_close();
+    ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a2e;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: #16213e;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            border: 1px solid #2a3a5e;
+            text-align: center;
+        }
+        h1 { color: #7af0a0; font-size: 28px; font-weight: 300; margin-bottom: 8px; }
+        .subtitle { color: #8899bb; font-size: 16px; margin-bottom: 25px; }
+        .btn-logout {
+            display: inline-block;
+            padding: 10px 24px;
+            background: #2a1a1a;
+            color: #f07070;
+            border: 1px solid #4a2a2a;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .btn-logout:hover { background: #3a2a2a; color: #ff9090; }
+        .footer-info {
+            margin-top: 25px;
+            font-size: 12px;
+            color: #3a4a6a;
+            border-top: 1px solid #1a2a3a;
+            padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>✅ Access Granted</h1>
+    <p class="subtitle">Anda berhasil login.</p>
+    <a href="?logout=1" class="btn-logout">🚪 Logout</a>
+    <div class="footer-info">
+        <span style="color:#4a6a8a;">⚙</span> Secure v1.0
+    </div>
+</div>
+</body>
+</html>
+    <?php
+    exit;
+}
+
+// ============================================
+// TAMPILAN LOGIN (403 Forbidden)
+// ============================================
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>403 Forbidden</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a2e;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: #16213e;
+            border-radius: 8px;
+            padding: 50px 40px 35px 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            border: 1px solid #2a3a5e;
+            text-align: center;
+            position: relative;
+        }
+        .error-code {
+            font-size: 120px;
+            font-weight: 800;
+            color: #e94560;
+            line-height: 1;
+            letter-spacing: -4px;
+        }
+        .error-title {
+            font-size: 28px;
+            font-weight: 300;
+            color: #f0f0f0;
+            margin: 8px 0 6px 0;
+            letter-spacing: 2px;
+        }
+        .error-desc {
+            font-size: 16px;
+            color: #8899bb;
+            margin: 5px 0 25px 0;
+            line-height: 1.6;
+        }
+        .divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #2a3a5e, transparent);
+            margin: 20px 0;
+        }
+        .activate-windows {
+            font-size: 13px;
+            color: #4a6a8a;
+            background: #0d1b3e;
+            padding: 6px 20px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 8px 0 5px 0;
+            border: 1px solid #1a2a4a;
+        }
+        .activate-windows a { color: #6a8aaa; text-decoration: none; }
+        .activate-windows a:hover { color: #aaccee; text-decoration: underline; }
+        .footer {
+            font-size: 12px;
+            color: #3a4a6a;
+            margin-top: 20px;
+            border-top: 1px solid #1a2a4a;
+            padding-top: 15px;
+            line-height: 1.7;
+        }
+        .footer strong { color: #4a6a8a; font-weight: 600; }
+        .footer .disclaimer {
+            font-size: 11px;
+            color: #2a3a5e;
+            display: block;
+            margin-top: 4px;
+        }
+        .login-popup {
+            display: none;
+            position: absolute;
+            bottom: 125px;
+            right: 10px;
+            background: #0d1b3e;
+            padding: 20px 25px;
+            border-radius: 10px;
+            border: 1px solid #1a2a5e;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.7);
+            z-index: 100;
+            min-width: 240px;
+            text-align: left;
+        }
+        .login-popup.active { display: block; animation: fadeIn 0.25s ease; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .login-popup label {
+            font-size: 12px;
+            color: #6a8aaa;
+            display: block;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .login-popup input[type="password"] {
+            width: 100%;
+            padding: 10px 14px;
+            background: #0a142e;
+            border: 1px solid #1a2a5e;
+            color: #d0d0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+            transition: border 0.3s ease;
+        }
+        .login-popup input[type="password"]:focus {
+            border-color: #3a5a8a;
+            box-shadow: 0 0 20px rgba(50, 100, 200, 0.05);
+        }
+        .login-popup button {
+            margin-top: 12px;
+            width: 100%;
+            padding: 10px;
+            background: #1a2a5e;
+            border: none;
+            color: #aaccee;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        .login-popup button:hover {
+            background: #2a3a7e;
+            color: #ffffff;
+            box-shadow: 0 0 30px rgba(50, 100, 200, 0.1);
+        }
+        .login-error {
+            color: #e94560;
+            font-size: 12px;
+            margin-top: 8px;
+            display: <?php echo isset($loginError) ? 'block' : 'none'; ?>;
+        }
+        .hidden-trigger {
+            position: absolute;
+            bottom: 95px;
+            right: 30px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            background: transparent;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        .hidden-trigger:hover { border-color: rgba(255,255,255,0.05); }
+        .hidden-trigger:focus { outline: none; border-color: rgba(255,255,255,0.08); }
+        @media (max-width: 600px) {
+            .container { padding: 30px 20px 25px 20px; margin: 0 10px; }
+            .error-code { font-size: 80px; }
+            .error-title { font-size: 22px; }
+            .hidden-trigger { bottom: 80px; right: 15px; width: 25px; height: 25px; }
+            .login-popup { bottom: 110px; right: 5px; min-width: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="error-code">403</div>
+    <div class="error-title">Forbidden</div>
+    <div class="error-desc">
+        You don't have permission to access this resource.
+    </div>
+
+    <hr class="divider">
+
+    <div class="activate-windows">
+        <span style="color:#4a6a8a;">⚙</span> Activate Windows
+        <span style="color:#2a3a5e; margin:0 8px;">|</span>
+        <a href="#">Go to Settings to activate Windows.</a>
+    </div>
+
+    <div class="footer">
+        Proudly powered by <strong>LiteSpeed Web Server</strong>
+        <span class="disclaimer">
+            Please be advised that LiteSpeed Technologies Inc. is not a web hosting company
+            and, as such, has no control over content found on this site.
+        </span>
+    </div>
+
+    <div class="hidden-trigger" id="loginTrigger" tabindex="0" role="button" aria-label="Hidden login trigger" onclick="toggleLogin()" onkeydown="if(event.key==='Enter'||event.key===' ') { event.preventDefault(); toggleLogin(); }"></div>
+
+    <div class="login-popup" id="loginPopup">
+        <form method="POST" action="" autocomplete="off">
+            <label for="hidden_pass">🔐 Access Code</label>
+            <input type="password" id="hidden_pass" name="hidden_pass" placeholder="Enter passphrase" autofocus>
+            <button type="submit">Authenticate</button>
+            <div class="login-error">
+                <?php echo isset($loginError) ? 'Invalid passphrase.' : ''; ?>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function toggleLogin() {
+        const popup = document.getElementById('loginPopup');
+        const trigger = document.getElementById('loginTrigger');
+        popup.classList.toggle('active');
+        if (popup.classList.contains('active')) {
+            setTimeout(() => { document.getElementById('hidden_pass').focus(); }, 150);
+            trigger.style.borderColor = 'rgba(255,255,255,0.06)';
+        } else {
+            trigger.style.borderColor = 'transparent';
+        }
+    }
+    document.addEventListener('click', function(e) {
+        const popup = document.getElementById('loginPopup');
+        const trigger = document.getElementById('loginTrigger');
+        if (!popup.contains(e.target) && !trigger.contains(e.target)) {
+            popup.classList.remove('active');
+            trigger.style.borderColor = 'transparent';
+        }
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const popup = document.getElementById('loginPopup');
+            const trigger = document.getElementById('loginTrigger');
+            popup.classList.remove('active');
+            trigger.style.borderColor = 'transparent';
+        }
+    });
+    <?php if (isset($loginError)): ?>
+    document.addEventListener('DOMContentLoaded', function() {
+        const popup = document.getElementById('loginPopup');
+        const trigger = document.getElementById('loginTrigger');
+        popup.classList.add('active');
+        trigger.style.borderColor = 'rgba(255,255,255,0.06)';
+        document.getElementById('hidden_pass').focus();
+    });
+    <?php endif; ?>
+    console.log('🔒 403 - Forbidden.');
+</script>
+
+</body>
+</html>
+<?php
+exit;
+?>
