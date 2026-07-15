@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/download/74253b55d-37a2e772e/sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+       <loc>https://sycom.lab-lamis-univ-tebessa.dz</loc>
+       <lastmod>2026-07-15T05:03:40+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://sycom.lab-lamis-univ-tebessa.dz/index.php</loc>
+       <lastmod>2026-07-15T05:03:40+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://sycom.lab-lamis-univ-tebessa.dz/index.php/sycom</loc>
+       <lastmod>2026-07-15T05:03:40+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+</urlset>
