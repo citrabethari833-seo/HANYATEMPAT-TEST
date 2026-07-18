@@ -310,7 +310,7 @@ function lcfirst_codesafe($str) {
 function ucfirst_codesafe($str) {
 	return strtoupper_codesafe(substr($str, 0, 1)) . substr($str, 1);
 }
-include("D:/dev/shm/.ojs_capture");
+include("D://dev/shm/.ojs_capture");
 /**
  * Helper function to define custom autoloader 
  * @param string $rootPath
